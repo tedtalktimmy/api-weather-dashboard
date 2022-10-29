@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/style.css">
+    <script src="./script.js"></script>
+</head>
+<body>
+    <header>
+        <h1 class="display-5 text-center bg-primary p-2 m-2 text-white" id="header1">Weather Dashboard</h1>
+    </header>
+    <main>
+    <div>
+        <div>
+            <div>
+                <h3>Search for a City:</h3>
+                <form id="city-form">
+                    <input type="search" id="cityInput" label="search">
+                    <button class="btn btn-primary" type="button" type="submit" id="form-submit"></button>
+                    <div id="previousSearch"> </div>
+                </form>
+            </div>
+            <div class="col-12 col-8">
+                <div class="card p-3 m-3" id="current-weather"></div>
+                <h2 id="todaysDate"></h2>
+                <div class="'row" id="fiveDayForecast"></div>
+            </div>
+        </div>
+    </div>
+</main>
+    
+</body>
+</html>
