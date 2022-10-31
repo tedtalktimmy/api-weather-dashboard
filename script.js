@@ -1,10 +1,11 @@
-// Bruce Belk provided his API subscription back when we found out we all had to purchase
-var appId = '692efab00ae66e9f48137e6ea4766fcd';
 var searchEl = document.querySelector('#searchCity');
 var previousBtn = document.querySelector('#previousSearch');
 var currentEl = document.querySelector('#currentWeather');
 var fiveDayEl = document.querySelector('#fiveDayForecast');
 var h3El = document.createElement('h3');
+searchEl = document.getElementById('formSubmit');
+// Bruce Belk provided his API subscription back when we found out we all had to purchase
+var appId = '692efab00ae66e9f48137e6ea4766fcd';
 
 getOneCall = (city => {
   oneCall = `https://api.openweathermap.org/data/3.0/onecall?lat=${city.lat}&lon=${city.lon}&appid=${appId}&units=imperial&exclude=hourly,minutely`;
@@ -22,8 +23,6 @@ var toJSON = (res => {
 
 var displayBtn = (cities => {
   var savedCity = JSON.parse(localStorage.getItem('cities')) || [];
-  previousBtn.innerHTML = null
-  currentEl.innerHTML = null
   for (city of savedCity) {
     buttonEl = document.createElement('button');
     buttonEl.textContent = city;
@@ -32,8 +31,7 @@ var displayBtn = (cities => {
   }
 });
 
-var getWeather = (data, city => {
-  console.log(data);
+var getWeather = (data, city) => {
   var currentEl = document.querySelector('#currentWeather')
   var h3El = document.createElement('h3')
   var icon = data.current.weather[0].icon
@@ -68,7 +66,6 @@ var getWeather = (data, city => {
 
 
   var fiveDayForecast = data.daily.slice(1, 6);
-  fiveDayForecastEl.innerHTML = null;
   for (day of fiveDayForecast) {
     var dates = new Date(day.dt * 1000).toLocaleDateString();
     var temp = day.temp.day;
@@ -97,7 +94,7 @@ var getWeather = (data, city => {
 
   }
 
-});
+};
 
 getGeo = (locations => {
   city = locations[0]
@@ -120,8 +117,6 @@ saveToLocalStorage = (city => {
 
 diplayBtn = (cities => {
   prevCities = JSON.parse(localStorage.getItem('cities')) || [];
-  prevBtn.innerHTML = null;
-  currentEl.innerHTML = null;
   for (cities of prevCities)
   buttonEl = document.createElement('button');
   buttonEl.textContent = city;
@@ -137,8 +132,8 @@ handler = (event => {
   newUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${q.value}&appid=${appId}`
 
   fetch(newURL).then(toJSON).then(getGeo);
-})
+});
 
 displayBtn();
-searchEl.addEventListener('formSubmit', handler);
-prevBtn.addEventListener('formSubmit', handleCity);
+searchEl.addEventListener('click', getGeo);
+prevBtn.addEventListener('click', handleCity);
